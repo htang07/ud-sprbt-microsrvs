@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.padual.com/java/logback.xsd">
- 
+<!-- <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.padual.com/java/logback.xsd"> -->
+ <configuration >
     <property name="LOGS" value="./logs" />
  
     <appender name="Console"
@@ -43,6 +43,11 @@
     <logger name="org.springframework.web" level="trace" additivity="false">
         <appender-ref ref="RollingFile" />
         <!-- <appender-ref ref="Console" /> -->
+    </logger>
+    
+    <logger name="com.in28minutes.springboot.web.controller" level="trace" additivity="false">
+    	<appender-ref ref="RollingFile" />
+        <appender-ref ref="Console" />
     </logger>
  
 </configuration>

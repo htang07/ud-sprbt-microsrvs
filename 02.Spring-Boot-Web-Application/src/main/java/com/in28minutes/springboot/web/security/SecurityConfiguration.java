@@ -10,12 +10,14 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	//Create User - in28Minutes/dummy
+	
+	//Overrride existing parent-class. Autowired on Setters https://www.baeldung.com/spring-autowire
 	@Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth)
             throws Exception {
         auth.inMemoryAuthentication()
             .passwordEncoder(NoOpPasswordEncoder.getInstance())
-        		.withUser("in28Minutes").password("dummy")
+        		.withUser("user").password("dummy")
                 .roles("USER", "ADMIN");
     }
 	

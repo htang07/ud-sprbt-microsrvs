@@ -1,3 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hello ${name}</title>
+
 <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
 <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script
@@ -9,6 +17,8 @@
 	
 	
 </script>
-
+</head>
+<body>
+	<h1>Hello ${name}</h1>
 </body>
 </html>
