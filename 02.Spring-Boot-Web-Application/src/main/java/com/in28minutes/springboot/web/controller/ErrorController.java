@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+//Note: This approach doesn't work as global exception handler catch exceptions
 @Controller
 public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.in28minutes.springboot.dummy.DummyService;
+import com.in28minutes.springboot.web.exceptions.GlobalException;
 
 @Controller
 @SessionAttributes("name")
@@ -36,11 +37,13 @@ public class PingController {
 			}
 			
 			catch(Exception e) {
-				RuntimeException re = new RuntimeException("rethrown message" +e.getMessage(), e.getCause());
-				re.setStackTrace(e.getStackTrace());
+//				RuntimeException re = new RuntimeException("rethrown message " +e.getMessage(), e.getCause());
+//				re.setStackTrace(e.getStackTrace());
+//				
+//					throw re;
 				
-					throw re;
-				
+				GlobalException ex = new GlobalException(e.getMessage(), e.getStackTrace(), e);
+				throw ex;
 			}
 //			RuntimeException re = new RuntimeException();
 //			re.setStackTrace(stackTrace);
