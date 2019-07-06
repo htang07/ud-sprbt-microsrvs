@@ -1,0 +1,3 @@
+----actuator browsing application states
+http://localhost:8080/actuator/env
+http://localhost:8080/actuator
