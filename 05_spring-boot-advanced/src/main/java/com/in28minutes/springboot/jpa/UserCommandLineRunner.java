@@ -8,9 +8,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserCommandLineRunner implements CommandLineRunner {
-
-	private static final Logger log = LoggerFactory
-			.getLogger(UserCommandLineRunner.class);
+	private final static ch.qos.logback.classic.Logger log = (ch.qos.logback.classic.Logger) LoggerFactory
+			.getLogger("com.in28minutes.springboot.jpa.UserCommandLineRunner");
+//	private static final Logger log = LoggerFactory
+//			.getLogger(UserCommandLineRunner.class);
 
 	@Autowired
 	private UserRepository repository;
