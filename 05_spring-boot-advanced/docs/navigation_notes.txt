@@ -1,3 +1,8 @@
 ----actuator browsing application states
 http://localhost:8080/actuator/env
 http://localhost:8080/actuator
+http://localhost:8080/actuator/conditions – formerly known as /autoconfig, builds a report of conditions around auto-configuration
+
+----h2 console
+http://localhost:8080/h2-console/
+jdbc:h2:mem:testdb

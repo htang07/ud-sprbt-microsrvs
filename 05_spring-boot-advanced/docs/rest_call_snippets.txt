@@ -1,0 +1,8 @@
+----test url
+GET: http://localhost:8080/surveys/Survey1/questions
+
+---restjparepository paging support
+http://localhost:8080/users/1
+http://localhost:8080/users?size=2
+http://localhost:8080/users?sort=name
+http://localhost:8080/users/search/findByRole?role=Admin
