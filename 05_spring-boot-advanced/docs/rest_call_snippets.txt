@@ -1,6 +1,6 @@
 ----test url
 GET: http://localhost:8080/surveys/Survey1/questions
-
+GET: http://localhost:8080/surveys/Survey1/questions/Question1
 ---restjparepository paging support
 http://localhost:8080/users/1
 http://localhost:8080/users?size=2

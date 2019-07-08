@@ -28,8 +28,7 @@ import com.in28minutes.springboot.Application;
 import com.in28minutes.springboot.model.Question;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class,
-		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SurveyControllerIT {
 
 	@LocalServerPort
@@ -41,8 +40,7 @@ public class SurveyControllerIT {
 
 	@Before
 	public void before() {
-		headers.add("Authorization", createHttpAuthenticationHeaderValue(
-				"user1", "secret1"));
+		headers.add("Authorization", createHttpAuthenticationHeaderValue("user1", "secret1"));
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 	}
 
@@ -52,10 +50,9 @@ public class SurveyControllerIT {
 		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 
 		ResponseEntity<String> response = restTemplate.exchange(
-				createURLWithPort("/surveys/Survey1/questions/Question1"),
-				HttpMethod.GET, entity, String.class);
+				createURLWithPort("/surveys/Survey1/questions/Question1"), HttpMethod.GET, entity, String.class);
 
-		String expected = "{id:Question1,description:Largest Country in the World,correctAnswer:Russia}";
+		String expected ="{\"id\": \"Question1\",\"description\": \"Largest Country in the World\",\"correctAnswer\": \"Russia\"}";
 
 		JSONAssert.assertEquals(expected, response.getBody(), false);
 	}
@@ -63,16 +60,13 @@ public class SurveyControllerIT {
 	@Test
 	public void retrieveAllSurveyQuestions() throws Exception {
 
-		ResponseEntity<List<Question>> response = restTemplate.exchange(
-				createURLWithPort("/surveys/Survey1/questions"),
-				HttpMethod.GET, new HttpEntity<String>("DUMMY_DOESNT_MATTER",
-						headers),
+		ResponseEntity<List<Question>> response = restTemplate.exchange(createURLWithPort("/surveys/Survey1/questions"),
+				HttpMethod.GET, new HttpEntity<String>("DUMMY_DOESNT_MATTER", headers),
 				new ParameterizedTypeReference<List<Question>>() {
 				});
 
-		Question sampleQuestion = new Question("Question1",
-				"Largest Country in the World", "Russia", Arrays.asList(
-						"India", "Russia", "United States", "China"));
+		Question sampleQuestion = new Question("Question1", "Largest Country in the World", "Russia",
+				Arrays.asList("India", "Russia", "United States", "China"));
 
 		assertTrue(response.getBody().contains(sampleQuestion));
 	}
@@ -85,8 +79,7 @@ public class SurveyControllerIT {
 
 		HttpEntity entity = new HttpEntity<Question>(question, headers);
 
-		ResponseEntity<String> response = restTemplate.exchange(
-				createURLWithPort("/surveys/Survey1/questions"),
+		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/surveys/Survey1/questions"),
 				HttpMethod.POST, entity, String.class);
 
 		String actual = response.getHeaders().get(HttpHeaders.LOCATION).get(0);
@@ -95,17 +88,46 @@ public class SurveyControllerIT {
 
 	}
 
+	@Test
+	public void tempRestTemp() {
+		// by default restTemplate return xml as response. to use json need pass Accept
+		// type in http header
+		String url = "http://localhost:" + port + "/surveys/Survey1/questions/Question1";
+		TestRestTemplate testRestTemplate = new TestRestTemplate();
+		String output = testRestTemplate.getForObject(url, String.class);
+		System.out.println("Response \n" + output);
+
+	}
+	
+	@Test
+	public void tempRestTempJsonVersion() throws JSONException {
+		// by default restTemplate return xml as response. to use json need pass Accept
+		// type in http header
+		String url = "http://localhost:" + port + "/surveys/Survey1/questions/Question1";
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", createHttpAuthenticationHeaderValue("user1", "secret1"));
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		HttpEntity<String>entity = new HttpEntity<String>(null, headers);
+		
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		TestRestTemplate testRestTemplate = new TestRestTemplate();
+		ResponseEntity<String>response = testRestTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+		
+		System.out.println("Response \n" + response.getBody());
+		assertTrue(response.getBody().contains("\"id\" : \"Question1\""));
+		String expected="{\r\n    \"id\": \"Question1\",\r\n    \"description\": \"Largest Country in the World\",\r\n    \"correctAnswer\": \"Russia\",\r\n    \"options\": [\r\n        \"India\",\r\n        \"Russia\",\r\n        \"United States\",\r\n        \"China\"\r\n    ]\r\n}";
+		JSONAssert.assertEquals(expected, response.getBody(), false);
+	}
+
 	private String createURLWithPort(final String uri) {
 		return "http://localhost:" + port + uri;
 	}
 
-	private String createHttpAuthenticationHeaderValue(String userId,
-			String password) {
+	private String createHttpAuthenticationHeaderValue(String userId, String password) {
 
 		String auth = userId + ":" + password;
 
-		byte[] encodedAuth = Base64.encode(auth.getBytes(Charset
-				.forName("US-ASCII")));
+		byte[] encodedAuth = Base64.encode(auth.getBytes(Charset.forName("US-ASCII")));
 
 		String headerValue = "Basic " + new String(encodedAuth);
 

@@ -1,0 +1,6 @@
+---String literal escape format
+https://www.freeformatter.com/java-dotnet-escape.html#ad-output
+https://www.freeformatter.com/
+
+-----Json Validator online
+https://jsonlint.com/
