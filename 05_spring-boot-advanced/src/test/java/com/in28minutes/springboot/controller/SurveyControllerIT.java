@@ -77,13 +77,13 @@ public class SurveyControllerIT {
 		Question question = new Question("DOESNTMATTER", "Question1", "Russia",
 				Arrays.asList("India", "Russia", "United States", "China"));
 
-		HttpEntity entity = new HttpEntity<Question>(question, headers);
+		HttpEntity entity = new HttpEntity<Question>(question, headers); //HttpEntity converts question object to json given specified header
 
 		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/surveys/Survey1/questions"),
 				HttpMethod.POST, entity, String.class);
 
 		String actual = response.getHeaders().get(HttpHeaders.LOCATION).get(0);
-
+		System.out.println("returned post-response: \n" + actual);
 		assertTrue(actual.contains("/surveys/Survey1/questions/"));
 
 	}
