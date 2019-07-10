@@ -40,14 +40,14 @@
     </root>
  
     <!-- LOG "com.baeldung*" at TRACE level -->
-    <logger name="org.springframework.web" level="trace" additivity="false">
+    <logger name="org.springframework" level="trace" additivity="false">
         <appender-ref ref="RollingFile" />
         <!-- <appender-ref ref="Console" /> -->
     </logger>
     
     <logger name="com.in28minutes.springboot.web.controller" level="trace" additivity="false">
     	<appender-ref ref="RollingFile" />
-        <appender-ref ref="Console" />
+        <!-- <appender-ref ref="Console" /> -->
     </logger>
  
 </configuration>

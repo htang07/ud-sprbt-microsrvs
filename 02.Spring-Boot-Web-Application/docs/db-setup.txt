@@ -1,0 +1,10 @@
+---initialize db table records for H2
+You can simply create a data.sql file (or data-h2.sql if you only want it to be applied in case H2 is your database) 
+in your src/main/resources folder and it will be automatically executed on startup. 
+In this file you just add some insert statements, eg.:
+Similarly, you can create a schema.sql file (or schema-h2.sql) as well to create your schema:
+CREATE TABLE task (
+  id          INTEGER PRIMARY KEY,
+  description VARCHAR(64) NOT NULL,
+  completed   BIT NOT NULL);
+  https://stackoverflow.com/questions/38040572/spring-boot-loading-initial-data

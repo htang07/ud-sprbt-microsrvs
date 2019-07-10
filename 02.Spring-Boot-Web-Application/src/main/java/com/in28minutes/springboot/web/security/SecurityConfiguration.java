@@ -17,7 +17,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
             throws Exception {
         auth.inMemoryAuthentication()
             .passwordEncoder(NoOpPasswordEncoder.getInstance())
-        		.withUser("user").password("dummy")
+        		.withUser("user1").password("dummy")
                 .roles("USER", "ADMIN");
     }
 	
@@ -27,6 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .antMatchers("/", "/*todo*/**").access("hasRole('USER')").and()
                 .formLogin();
         
+        //H2 console require settings below to be disabled
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }
