@@ -1,0 +1,2 @@
+----Check log for autoconfiguration
+search OnClassCondition from log

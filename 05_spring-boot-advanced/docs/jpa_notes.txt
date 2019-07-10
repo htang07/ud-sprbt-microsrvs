@@ -7,3 +7,11 @@
  - spring.datasource.initialize=true 
  - spring.jpa.hibernate.ddl-auto=update
  - spring.jpa.show-sql=true
+ 
+ 
+ -----for jpa chapter
+ switch to com.in28minutes.learning.jpa.jpain10steps --> JpaIn10StepsApplication.java run as java application
+ 
+ ----h2 console
+http://localhost:8080/h2-console/
+Use dburl: jdbc:h2:mem:testdb
