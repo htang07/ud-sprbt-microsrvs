@@ -104,7 +104,8 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	
+	<!-- repository below is used for springboot migration -->
 	<repositories>
 		<repository>
 			<id>spring-milestones</id>
